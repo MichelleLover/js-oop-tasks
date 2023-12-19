@@ -39,9 +39,34 @@ describe('es6', () => {
     describe('#Dictionary', () => {
         it('экземпляр класса создается', () => {
             const dic = new core.Dictionary();
-
-            // TODO
             assert.strictEqual(!!dic, true);
         });
+
+
+        it('размер словаря изменяется', () => {
+            const dic = new core.Dictionary();
+            dic.addWord("horse", "лошадь")
+            dic.addWord("telephone", "телефон")
+            assert.strictEqual(dic.getSize(), 2)
+            dic.deleteWord("horse")
+            assert.strictEqual(dic.getSize(), 1)
+        })
+
+        it('слова добавляются корректно', () => {
+            const dic = new core.Dictionary();
+            dic.addWord("horse", "лошадь")
+            dic.addWord("telephone", "телефон")
+            assert.deepStrictEqual(dic.getAllWords(), ["horse", "telephone"])
+        })
+
+        it('слова сохраняют свой перевод', () => {
+            const dic = new core.Dictionary();
+            dic.addWord("horse", "лошадь")
+            dic.addWord("telephone", "телефон")
+            assert.strict(dic.getWord("horse"), "лошадь")
+            assert.strict(dic.getWord("telephone"), "телефон")
+            dic.deleteWord("horse")
+            assert.strictEqual(dic.getWord("horse"), undefined)
+        })
     });
 });
